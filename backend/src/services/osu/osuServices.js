@@ -11,6 +11,14 @@ async function getMatch(id) {
         }
     });
 
-    return await response.json();
+    const match = await response.json();
+    // console.log(match.events);
+
+    return match;
 }
 
+
+// getMatch(119794867);
+
+
+module.exports = { getMatch };
