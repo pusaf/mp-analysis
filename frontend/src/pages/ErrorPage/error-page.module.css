@@ -1,0 +1,23 @@
+.page {
+    padding: 100px;
+    height: calc(100vh - 200px);
+    width: calc(100vw - 200px);
+    background-image: url('../../assets/error-page-background.jpg');
+    background-repeat: none;
+    background-size: 100% 100%;
+}
+
+.title {
+    font-size: 90px;
+    font-weight: bold;
+    padding: 50px;
+}
+
+.title, .page a {
+    background-color: rgba(232, 232, 232, 0.4);
+}
+
+.page a {
+    padding: 0 50px 50px 50px;
+    font-size: 30px;
+}
