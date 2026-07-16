@@ -1,0 +1,33 @@
+.navbar {
+    background-color: darkblue;
+    color: white;
+    padding: 0px ;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbuttons {
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    text-decoration: none;
+    color: inherit;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.flexContainer {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}

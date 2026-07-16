@@ -1,0 +1,18 @@
+import styles from './navbar.module.css';
+import { Link } from 'react-router';
+
+const Navbar = () => {
+    return (
+    <nav className={styles.navbar}>
+        <div className={styles.flexContainer}>
+            <h2>TEMPORARY NAME</h2>  
+        </div>
+        <ul className={styles.navbuttons}>
+            <li><Link to="/">Home</Link></li>
+            <li><Link to="analyze">Analyze Matches</Link></li>
+        </ul>
+    </nav>
+    );
+};
+
+export default Navbar;
