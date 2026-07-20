@@ -1,4 +1,4 @@
-const { parseMatchId } = require("../src/utils/matchValidation");
+const { parseMatchId } = require("../src/utils/matchUtils");
 
 test.skip("recognizes just mp ID", () => {
     expect(parseMatchId('119794867')).toBe(119794867);

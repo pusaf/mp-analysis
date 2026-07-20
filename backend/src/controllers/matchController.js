@@ -1,5 +1,5 @@
 const db = require("../db/queries");
-const { parseMatchId } = require("../utils/matchValidation");
+const { parseMatchId } = require("../utils/matchUtils");
 
 // Returns an array of match objects corresponding to the ids,
 // skips over any fake ids
@@ -7,8 +7,8 @@ async function getMatches(req, res) {
     try {
         const { matches } = req.body;
 
+
         const ids = matches
-            .split("\n")
             .map(line => parseMatchId(line))
             .filter(Boolean);
         
