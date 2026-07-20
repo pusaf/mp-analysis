@@ -4,6 +4,7 @@ const path = require("node:path");
 const analysisRouter = require("./routes/analysisRouter");
 const matchRouter = require("./routes/matchRouter");
 
+app.use(express.json());
 app.use('/api/matches', matchRouter);
 app.use('/api/analysis', analysisRouter);
 

@@ -13,6 +13,8 @@ async function getMatches(ids) {
         })
     )
 
+    matches.filter(match => match !== false);
+
     return matches;
 }
 
@@ -20,7 +22,7 @@ async function getMatches(ids) {
 // Imports a match into the db that isn't there yet
 // Also returns the match object
 async function importMatch(id) {
-    console.log(`match ${id} not found in db, getting match from api`);
+    console.log(`Match ${id} not found in db, getting match from api`);
 
     matchObject = await getMatch(id);
 
@@ -36,10 +38,11 @@ async function importMatch(id) {
         [id, matchObject]
     );
     
-    console.log(`match ${id} saved`);
+    console.log(`Match ${id} saved`);
     
     return matchObject;
 }
+
 
 
 module.exports = {getMatches}

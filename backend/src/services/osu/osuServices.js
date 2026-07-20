@@ -11,14 +11,22 @@ async function getMatch(id) {
         }
     });
 
+    if (response.status === 404) {
+        console.log("match doesn't exist");
+        return false;
+    }
+
+    if (!response.ok) {
+        throw new Error(`osu API error: ${response.status}`);
+        return false;
+    }
+
     const match = await response.json();
-    // console.log(match.events);
 
     return match;
 }
 
 
-// getMatch(119794867);
 
 
 module.exports = { getMatch };
