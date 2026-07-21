@@ -9,7 +9,7 @@ async function getMatches(ids) {
 
             return result.rows.length
                 ? result.rows[0].data
-                : importMatch(id);
+                : upsertMatch(id);
         })
     )
 
@@ -19,30 +19,30 @@ async function getMatches(ids) {
 }
 
 
-// Imports a match into the db that isn't there yet
+// Upserts a match into the db
 // Also returns the match object
-async function importMatch(id) {
-    console.log(`Match ${id} not found in db, getting match from api`);
+async function upsertMatch(id) {
 
-    matchObject = await getMatch(id);
+    const matchObject = await getMatch(id);
 
-    console.log(`match ${id} acquired`);
+    if (!matchObject) {
+        throw new Error(`Match ${id} does not exist`);
+    }
 
     // add info into match db
     await pool.query(
         `
         INSERT INTO matches (id, data)
         VALUES ($1, $2)
-        ON CONFLICT (id) DO NOTHING
+        ON CONFLICT (id)
+        DO UPDATE SET data = EXCLUDED.data
         `,
         [id, matchObject]
     );
-    
-    console.log(`Match ${id} saved`);
     
     return matchObject;
 }
 
 
 
-module.exports = {getMatches}
+module.exports = {getMatches, upsertMatch}

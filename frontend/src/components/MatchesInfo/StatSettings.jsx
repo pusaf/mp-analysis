@@ -4,6 +4,7 @@ import MapList from '../MapList/MapList';
 import { useMemo } from 'react';
 
 const StatSettings = ({selectedMatches, setSelectedMatches}) => {
+    // Generates a list of unique maps + mod combos that are in selectedMatches
     const uniqueMaps = useMemo(() => {
         const beatmaps = [];
 
