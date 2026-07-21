@@ -57,13 +57,6 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
             <button type="submit" disabled={!matchInputs.trim()}>Get Matches</button>
         </form>
         
-        <div>
-            <ul>
-                {selectedMatches.map((mp) => {
-                    return <li key={mp.match.id}>{mp.match.name}</li>
-                })}
-            </ul>
-        </div>
     </>)
 }
 
