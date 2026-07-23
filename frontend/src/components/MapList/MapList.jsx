@@ -3,11 +3,15 @@ import MapToggle from '../MapToggle/MapToggle';
 
 const MapList = ({ maps }) => {
     return (<>
-        <ul>
-            {maps.map((beatmap, index) => {
-                return <MapToggle key={"toggle" + beatmap.id + "-" + beatmap.mods} map={beatmap} index={index} />
-            })}
-        </ul>
+        <div className={styles.card}>
+            <h2>Found Maps ({maps.length})</h2>
+            <h3>Choose which maps to be included in the analysis.</h3>
+            <ul>
+                {maps.map((beatmap, index) => {
+                    return <MapToggle key={"toggle" + beatmap.id + "-" + beatmap.mods} map={beatmap} index={index} />
+                })}
+            </ul>
+        </div>
     </>);
 }
 

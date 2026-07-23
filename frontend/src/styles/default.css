@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+:root {
+    --color-primary: rgb(22, 18, 58);
+    --color-secondary: rgb(14, 15, 47);
+    --color-tertiary: rgb(30, 27, 72);
+    --color-background: rgb(9, 10, 39);
+    --color-border: rgb(49, 36, 105);
+    --color-text-1: rgb(240,240,240);
+    --color-text-2: rgb(117, 117, 117);
+    --color-button: rgb(111, 58, 221);
+    --color-button-unavailable: rgb(68, 38, 130);
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -15,4 +27,22 @@ body {
 
 * {
     font-family: inherit;
+}
+
+h1 {
+    margin: 10px;
+}
+
+h2 {
+    font-size: 14px;
+    font-weight: bold;
+    color: var(--color-text-1);
+    margin: 0;
+}
+
+h3 {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-2);
+    margin: 0;
 }

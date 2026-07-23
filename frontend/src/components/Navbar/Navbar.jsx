@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
     <nav className={styles.navbar}>
         <div className={styles.flexContainer}>
-            <h2>TEMPORARY NAME</h2>  
+            <h1>TEMPORARY NAME</h1>  
         </div>
         <ul className={styles.navbuttons}>
             <li><Link to="/">Home</Link></li>

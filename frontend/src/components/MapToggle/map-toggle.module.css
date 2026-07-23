@@ -1,3 +1,40 @@
 .beatmap {
     list-style-type: none;
+    display: flex;
+    align-items: center;
+
+    background-color: var(--color-tertiary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 5px;
+}
+
+.beatmap:last-child {
+    border: none;
+}
+
+
+.beatmap label {
+    font-size: 12px;
+    display: flex;
+
+    width: 90%;
+}
+
+.mapName {
+    flex: 1;
+    min-width: 0;
+    
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mods {
+    flex-shrink: 0;
+    width: 20%; 
+    text-align: right;
+}
+
+.beatmap input {
+    accent-color: var(--color-button)
 }

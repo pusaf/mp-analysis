@@ -3,11 +3,15 @@ import MatchDisplay from '../MatchDisplay/MatchDisplay';
 
 const MatchList = ({selectedMatches, setSelectedMatches}) => {
     return (<>
-        <ul>
-            {selectedMatches.map((mp) => {
-                return <MatchDisplay key={mp.match.id} mp={mp}/>
-            })}
-        </ul>
+        <div className={styles.card}>
+            <h2>Selected Matches ({selectedMatches.length})</h2>
+            <h3>These matches will be included in your analysis.</h3>
+            <ul>
+                {selectedMatches.map((mp) => {
+                    return <MatchDisplay key={mp.match.id} mp={mp}/>
+                })}
+            </ul>
+        </div>
     </>);
 }
 

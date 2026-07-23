@@ -49,6 +49,7 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
             <div>
                 <label htmlFor="matches">Add mp links or ids here, one per line</label>
             </div>
+            <h3>You can paste full links or just the match ID.</h3>
             <textarea 
                 id="matches" name="matches" type="url" placeholder="osu.ppy.sh/mp/1234 or 1234" required 
                 value={matchInputs}
