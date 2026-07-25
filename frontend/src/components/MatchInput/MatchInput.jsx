@@ -1,6 +1,7 @@
 import styles from './match-input.module.css';
 import {useState} from "react";
 import { parseMatchId } from '../../utils/matchUtils';
+import Button from '../Button/Button';
 
 const MatchInput = ({selectedMatches, setSelectedMatches}) => {
     const [matchInputs, setMatchInputs] = useState("");
@@ -55,7 +56,7 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
                 value={matchInputs}
                 onChange={(e) => setMatchInputs(e.target.value)}
             />
-            <button type="submit" disabled={!matchInputs.trim()}>Get Matches</button>
+            <Button enabled={matchInputs.trim()} text="Get Matches"/>
         </form>
         
     </>)

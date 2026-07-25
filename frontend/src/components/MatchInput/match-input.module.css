@@ -41,29 +41,6 @@
     border: 1px solid var(--color-button);
 }
 
-.card button {
-    border: none;
-    border-radius: 5px;
-    padding:  5px 20px;
-    margin-top: 10px;
-    cursor: pointer;
-
-    background-color: var(--color-button);
-
-    color: var(--color-text-1);
-    font-weight: bold;
-    flex: 0 1 auto;
-}
-
-.card button:disabled {
-    background-color: var(--color-button-unavailable);
-    cursor: default;
-}
-
-.card button:active:enabled {
-    transform: scale(0.98);
-}
-
 
 @media screen and (max-width: 600px) {
     .card {
