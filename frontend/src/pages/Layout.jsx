@@ -3,12 +3,14 @@ import Navbar from '../components/Navbar/Navbar.jsx';
 
 
 const Layout = () => {
-    return (<>
-        <Navbar />
+    return (
         <div className="layout">
-            <Outlet />
+            <Navbar />
+            <main className="content">
+                <Outlet />
+            </main>
         </div>
-    </>);
+    );
 };
 
 export default Layout;
