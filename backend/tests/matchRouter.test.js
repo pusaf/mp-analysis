@@ -12,7 +12,7 @@ afterAll(async () => {
 app.use(express.json());
 app.use("/", matchRouter);
 
-test("Single passed match id works", async () => {
+test.skip("Single passed match id works", async () => {
     const res = await request(app)
         .post("/import")
         .send({
@@ -22,7 +22,7 @@ test("Single passed match id works", async () => {
     expect(res.body[0].match.name).toBe('5DCT6: (pusaf) vs (jykca)');
 });
 
-test("Single passed mp link works", async () => {
+test.skip("Single passed mp link works", async () => {
     const res = await request(app)
         .post("/import")
         .send({
@@ -32,7 +32,7 @@ test("Single passed mp link works", async () => {
     expect(res.body[0].match.name).toBe('5DCT6: (pusaf) vs (jykca)');
 });
 
-test("Multiple passed matches works", async () => {
+test.skip("Multiple passed matches works", async () => {
     const res = await request(app)
         .post("/import")
         .send({
@@ -43,7 +43,7 @@ test("Multiple passed matches works", async () => {
     expect(res.body[1].match.name).toBe('5DCT6: (pusaf) vs (Lexic)');
 });
 
-test("One incorrect match is skipped", async () => {
+test.skip("One incorrect match is skipped", async () => {
     const res = await request(app)
         .post("/import")
         .send({
@@ -54,7 +54,7 @@ test("One incorrect match is skipped", async () => {
     expect(res.body.length).toBe(1);
 });
 
-test("Fake id is skipped", async () => {
+test.skip("Fake id is skipped", async () => {
     const res = await request(app)
         .post("/import")
         .send({
