@@ -25,6 +25,11 @@ function arraysEqual(a, b) {
   return true;
 }
 
+// Calculates mean for an array of numbers
+function mean(arr) {
+    return avg = arr.reduce((total, value) => total + value) / arr.length
+}
 
 
-module.exports = { median, arraysEqual };
+
+module.exports = { mean, median, arraysEqual };
