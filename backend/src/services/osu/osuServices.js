@@ -1,6 +1,8 @@
 const { getAccessToken } = require("./auth");
 
-// Gets a Match object from the osu API
+/**
+ * Gets a Match object from the osu API
+ */
 async function getMatch(id) {
     const token = await getAccessToken();
 
@@ -16,7 +18,8 @@ async function getMatch(id) {
         const response = await fetch(url, {
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`
+                "Authorization": `Bearer ${token}`,
+                "x-api-version": "20220704"
             }
         });
 
@@ -39,9 +42,24 @@ async function getMatch(id) {
     }
 
     let events = [...match.events];
+    const users = new Map();
+
+    // Add users from initial response
+    match.users.forEach((user) => {
+        users.set(user.id, user);
+    });
 
     while (events[0].id !== match.first_event_id) {
         const previous = await fetchMatch(events[0].id);
+
+        if (!previous) {
+            break;
+        }
+
+        // Add users from older response
+        previous.users.forEach((user) => {
+            users.set(user.id, user);
+        });
 
         events = [
             ...previous.events,
@@ -51,7 +69,8 @@ async function getMatch(id) {
 
     return {
         ...match,
-        events
+        events,
+        users: [...users.values()]
     };
 }
 

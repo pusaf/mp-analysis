@@ -1,4 +1,5 @@
 const {median, mean, arraysEqual} = require("../../utils/statsUtils");
+const { modNormalizer } = require('../../utils/statsUtils'); 
 
 
 // Gets the median scores of maps in matchGames
@@ -19,7 +20,7 @@ function medianScores(maps, matchGames) {
 // Gets the median score of an array of scores
 // Takes in an array of score objects
 function medianScore(scores) {
-    values = scores.map((score) => score.score);
+    values = scores.map((score) => modNormalizer(score));
     if (values.length == 0) {
         return null;
     }

@@ -31,5 +31,30 @@ function mean(arr) {
 }
 
 
+/**
+ * Normalizes a score with respect to its mods.
+ * @param {Score} score 
+ * @return {number} Normalized score value
+ */
+function modNormalizer(score) {
+    const HR = 1.1;
+    const HD = 1.06;
+    const DT = 1.2;
+    const FL = 1.12;
 
-module.exports = { mean, median, arraysEqual };
+    finalScore = score.score;
+
+    if (score.mods.some((mod) => mod == 'HR')) {
+        finalScore /= HR;
+    } else if (score.mods.some((mod) => mod == 'HD')) {
+        finalScore /= HD;
+    } else if (score.mods.some((mod) => mod == 'DT')) {
+        finalScore /= DT;
+    } else if (score.mods.some((mod) => mod == 'FL')) {
+        finalScore /= FL;
+    }
+    
+    return Math.round(finalScore);
+}
+
+module.exports = { mean, median, arraysEqual, modNormalizer };
