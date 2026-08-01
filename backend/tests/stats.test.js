@@ -1,10 +1,53 @@
 const { medianScores, avgScores } = require('../src/services/stats/mappool');
-const { pscores } = require('../src/services/stats/individual');
+const { pscores, playcounts } = require('../src/services/stats/individual');
 const db = require('../src/db/queries');
 
 
+test("Single 1v1 match playcount", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([119794867]);
+    const testMaps = [
+        {   
+            id: 4072324,
+            mods: ['NF']
+        },
+        {
+            id: 5132406,
+            mods: ['NF']
+        }
+    ]
 
-test.skip("Single 1v1 match pscore", async() => {
+    pcs = playcounts(testMaps, testMatch);
+    expect(pcs[0].mapsPlayed).toBe(2);
+    expect(pcs[0].maxMapsPlayed).toBe(2);
+    expect(pcs[1].mapsPlayed).toBe(2);
+    expect(pcs[1].maxMapsPlayed).toBe(2);
+})
+
+test("Single team match playcount", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([121102814]);
+    const testMaps = [
+        {   
+            id: 4973174,
+            mods: ['NF']
+        },
+        {
+            id: 5654433,
+            mods: ['NF', 'HD']
+        }
+    ]
+
+    pcs = playcounts(testMaps, testMatch);
+    pusaf = pcs.find((user) => user.user.id == 20594928);
+    pikapwn = pcs.find((user) => user.user.id == 2012453);
+    expect(pusaf.mapsPlayed).toBe(1);
+    expect(pusaf.maxMapsPlayed).toBe(2);
+    expect(pikapwn.mapsPlayed).toBe(2);
+})
+
+
+test("Single 1v1 match pscore", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([119794867]);
     const testMaps = [
@@ -23,7 +66,7 @@ test.skip("Single 1v1 match pscore", async() => {
     expect(scores[1].performanceScore).toBeCloseTo(0.4312461597);
 })
 
-test.skip("Multiple 1v1 match pscore", async() => {
+test("Multiple 1v1 match pscore", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([119794867, 119786245]);
     const testMaps = [

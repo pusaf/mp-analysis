@@ -1,10 +1,15 @@
 const { medianScores } = require("./mappool");
-const { getUniquePlayers,  getAvgMapsPlayed, playerParticipated } = require('../../utils/matchUtils');
+const { getUniquePlayers,  getAvgMapsPlayed, playerParticipated, getMapsPlayed } = require('../../utils/matchUtils');
 const { modNormalizer } = require('../../utils/statsUtils'); 
 
 
 
 // Individual statistics
+
+// TODO
+// 1. Finish implementing each function
+// 2. Create centralized "main" stats function to eliminate repeated calling of parsing functions (getting scores, players, etc.)
+
 
 /**
  * Calculates the performance scores of each player who set a score in the given matches.
@@ -28,8 +33,6 @@ function pscores(maps, matches) {
         });
     });
 
-
-
     // Get data needed to calculate pscore
     medians = medianScores(maps, matchGames); 
     avgMapsPlayed = matches.map(match => getAvgMapsPlayed(match, maps));
@@ -39,8 +42,6 @@ function pscores(maps, matches) {
     matchesPlayed = players.map((player) => {
         return matches.map((match) => playerParticipated(match, player.id, maps));
     });
-
-
 
     // Calculate pscore for each player
     data = [];
@@ -75,12 +76,10 @@ function pscore(scores, medians, matchesPlayed, meanMapsPlayed) {
 
     let performanceScore = 0;
 
-
     for (let i = 0; i < scores.length; i++) {
         performanceScore += modNormalizer(scores[i].score) / medians[scores[i].map];
     }
     performanceScore /= scores.length;
-
 
     let matchCountNormalizer = 0
     for (let i = 0; i < matchesPlayed.length; i++) {
@@ -90,25 +89,74 @@ function pscore(scores, medians, matchesPlayed, meanMapsPlayed) {
     }
 
     performanceScore *= Math.cbrt(scores.length / matchCountNormalizer);
-
-
     return performanceScore;
 }
 
+/**
+ * Calculates how many maps each player played out of possible maps they could have
+ * @param {Array<Map>} maps 
+ * @param {Array<Match>} matches 
+ * @returns {Array<{user: Player, mapsPlayed: number, maxMapsPlayed: number}>}
+ */
+function playcounts(maps, matches) {
 
-function playcount(players, scores) {
+    players = getUniquePlayers(matches);
+    scores = players.map(player => getPlayerScores(matches, player.id, maps));
+    mapsPerMatch = matches.map(match => getMapsPlayed(match, maps));
+    matchesPlayed = players.map((player) => {
+        return matches.map((match) => playerParticipated(match, player.id, maps));
+    });
+
+    data = [];
+    for (let i = 0; i < players.length; i++) {
+        if (scores[i].length !== 0) {
+            let maxMapsPlayed = 0;
+            for (let j = 0; j < matches.length; j++) {
+                if (matchesPlayed[i][j]) {
+                    maxMapsPlayed += mapsPerMatch[j];
+                }
+            }
+
+
+            data.push({
+                'user': players[i],
+                'mapsPlayed': scores[i].length,
+                'maxMapsPlayed': maxMapsPlayed
+            });
+        }
+    }
+
+    return data;
+}
+
+/**
+ * Calculates the mod normalized average score each player got
+ * @param {Array<Map>} maps 
+ * @param {Array<Match>} matches 
+ * @returns {Array<{user: Player, avgScore: number}>}
+ */
+function avgScore(maps, matches) {
 
 }
 
-function avgScore(players, scores) {
 
-}
-
-function avgAcc(players, scores) {
+/**
+ * Calculates the average accuracy each player got
+ * @param {Array<Map>} maps 
+ * @param {Array<Match>} matches 
+ * @returns {Array<{user: Player, avgAcc: number}>}
+ */
+function avgAcc(maps, matches) {
     
 }
 
-function highestScore(players, scores) {
+/**
+ * Returns the highest mod normalized score each player got
+ * @param {Array<Map>} maps 
+ * @param {Array<Match>} matches 
+ * @returns {Array<{user: Player, map: Map, highScore: number}>}
+ */
+function highestScore(maps, matches) {
 
 }
 
@@ -173,4 +221,4 @@ function getPlayerScores(matches, playerId, maps) {
 
 
 
-module.exports = { pscores, leaderboard }
+module.exports = { pscores, leaderboard, playcounts }

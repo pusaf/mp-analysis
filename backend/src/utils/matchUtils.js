@@ -1,3 +1,5 @@
+const { arraysEqual } = require('./statsUtils');
+
 
 
 // Parses the match ID out of a string. 
@@ -86,7 +88,7 @@ function getAvgMapsPlayed(match, maps) {
         const game = event.game;
 
         if (!game) return;
-        if (!maps.some(map => map.id === game.beatmap_id)) {
+        if (!maps.some(map => map.id === game.beatmap_id && arraysEqual(map.mods, game.mods))) {
             return;
         }
 
@@ -135,5 +137,20 @@ function playerParticipated(match, playerId, maps) {
 }
 
 
+/**
+ * Returns how many times any map in maps was played in the given match.
+ * @param {Match} match 
+ * @param {Array<Map>} maps 
+ * @returns {number}
+ */
+function getMapsPlayed(match, maps) {
+    return match.events.filter((event) => {
+        const game = event.game;
+        if (!game) return false;
+        return maps.some(map => map.id === game.beatmap_id && arraysEqual(map.mods, game.mods));
 
-module.exports = { parseMatchId, getUniquePlayers, countPlayerMatches, getAvgMapsPlayed, playerParticipated } 
+    }).length;
+}
+
+
+module.exports = { parseMatchId, getUniquePlayers, countPlayerMatches, getAvgMapsPlayed, playerParticipated, getMapsPlayed } 
