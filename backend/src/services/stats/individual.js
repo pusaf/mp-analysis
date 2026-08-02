@@ -117,7 +117,6 @@ function playcounts(maps, matches) {
                 }
             }
 
-
             data.push({
                 'user': players[i],
                 'mapsPlayed': scores[i].length,
@@ -129,6 +128,7 @@ function playcounts(maps, matches) {
     return data;
 }
 
+
 /**
  * Calculates the mod normalized average score each player got
  * @param {Array<Map>} maps 
@@ -136,7 +136,23 @@ function playcounts(maps, matches) {
  * @returns {Array<{user: Player, avgScore: number}>}
  */
 function avgScore(maps, matches) {
+    
+    players = getUniquePlayers(matches);
+    scores = players.map(player => getPlayerScores(matches, player.id, maps));
 
+    data = [];
+
+    for (let i = 0; i< players.length; i++) {
+        if (scores[i].length > 0) {
+            let avg = scores[i].reduce((total, value) => total + value.score.score, 0)/scores[i].length;
+            
+            data.push({
+                'user': players[i],
+                'avgScore': avg
+            })
+        }
+    }
+    return data;
 }
 
 
@@ -147,7 +163,22 @@ function avgScore(maps, matches) {
  * @returns {Array<{user: Player, avgAcc: number}>}
  */
 function avgAcc(maps, matches) {
-    
+    players = getUniquePlayers(matches);
+    scores = players.map(player => getPlayerScores(matches, player.id, maps));
+
+    data = [];
+
+    for (let i = 0; i< players.length; i++) {
+        if (scores[i].length > 0) {
+            let avg = scores[i].reduce((total, value) => total + value.score.accuracy, 0)/scores[i].length ;
+            
+            data.push({
+                'user': players[i],
+                'avgAcc': avg
+            })
+        }
+    }
+    return data;
 }
 
 /**
@@ -221,4 +252,4 @@ function getPlayerScores(matches, playerId, maps) {
 
 
 
-module.exports = { pscores, leaderboard, playcounts }
+module.exports = { pscores, leaderboard, playcounts, avgScore, avgAcc }

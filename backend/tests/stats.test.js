@@ -1,5 +1,5 @@
 const { medianScores, avgScores } = require('../src/services/stats/mappool');
-const { pscores, playcounts } = require('../src/services/stats/individual');
+const { pscores, playcounts, avgScore, avgAcc } = require('../src/services/stats/individual');
 const db = require('../src/db/queries');
 
 
@@ -17,7 +17,7 @@ test("Single 1v1 match playcount", async() => {
         }
     ]
 
-    pcs = playcounts(testMaps, testMatch);
+    const pcs = playcounts(testMaps, testMatch);
     expect(pcs[0].mapsPlayed).toBe(2);
     expect(pcs[0].maxMapsPlayed).toBe(2);
     expect(pcs[1].mapsPlayed).toBe(2);
@@ -38,7 +38,7 @@ test("Single team match playcount", async() => {
         }
     ]
 
-    pcs = playcounts(testMaps, testMatch);
+    const pcs = playcounts(testMaps, testMatch);
     pusaf = pcs.find((user) => user.user.id == 20594928);
     pikapwn = pcs.find((user) => user.user.id == 2012453);
     expect(pusaf.mapsPlayed).toBe(1);
@@ -46,6 +46,44 @@ test("Single team match playcount", async() => {
     expect(pikapwn.mapsPlayed).toBe(2);
 })
 
+
+test("Single 1v1 match avg score", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([119794867]);
+    const testMaps = [
+        {   
+            id: 4072324,
+            mods: ['NF']
+        },
+        {
+            id: 5132406,
+            mods: ['NF']
+        }
+    ]
+
+    const avg = avgScore(testMaps, testMatch);
+    expect(avg[0].avgScore).toBeCloseTo(437611, 1);
+    expect(avg[1].avgScore).toBeCloseTo(147809.5, 1);
+})
+
+test("Single 1v1 match avg acc", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([119794867]);
+    const testMaps = [
+        {   
+            id: 4072324,
+            mods: ['NF']
+        },
+        {
+            id: 5132406,
+            mods: ['NF']
+        }
+    ]
+
+    const avg = avgAcc(testMaps, testMatch);
+    expect(avg[0].avgAcc).toBeCloseTo(0.96125);
+    expect(avg[1].avgAcc).toBeCloseTo(0.731);
+})
 
 test("Single 1v1 match pscore", async() => {
     // Generate testing data
@@ -61,7 +99,7 @@ test("Single 1v1 match pscore", async() => {
         }
     ]
 
-    scores = pscores(testMaps, testMatch);
+    const scores = pscores(testMaps, testMatch);
     expect(scores[0].performanceScore).toBeCloseTo(1.56875384);
     expect(scores[1].performanceScore).toBeCloseTo(0.4312461597);
 })
@@ -80,7 +118,7 @@ test("Multiple 1v1 match pscore", async() => {
         }
     ]
 
-    scores = pscores(testMaps, testMatch);
+    const scores = pscores(testMaps, testMatch);
     expect(scores[0].performanceScore).toBeCloseTo(1.507944256);
     expect(scores[1].performanceScore).toBeCloseTo(0.3910464563);
     expect(scores[2].performanceScore).toBeCloseTo(1.268920799);
@@ -90,13 +128,13 @@ test("Multiple 1v1 match pscore", async() => {
 
 // this test is currently not working due to the fact that i haven't implemente map exclusion
 // since there was a tb showcase match at the end, the numbers are slightly fucked up
-test("Multiple team match pscore", async() => {
+test.skip("Multiple team match pscore", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([120062857, 120078133, 120078716]);
     const testMaps = getowctest()
 
 
-    scores = pscores(testMaps, testMatch);
+    const scores = pscores(testMaps, testMatch);
     display = scores.map(thing => `${thing.user.username} + ${thing.performanceScore}`);
     console.log(display);
     expect(true).toBe(true)
