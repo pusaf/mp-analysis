@@ -7,9 +7,6 @@ module.exports = { performanceStats };
 
 // Individual statistics
 
-// TODO
-// 1. Finish implementing each function
-// 2. Create centralized "main" stats function to eliminate repeated calling of parsing functions (getting scores, players, etc.)
 
 
 /**
@@ -28,11 +25,11 @@ function performanceStats(maps, matches) {
     scores = players.map(player => getPlayerScores(matches, player.id, maps));
 
     // Generate statistics for each player
-    pscoreArr = pscores(maps, matches, players, scores);
-    playcountArr = playcounts(maps, matches, players, scores);
-    avgScoreArr = avgScore(maps, matches, players, scores);
-    avgAccArr = avgAcc(maps, matches, players, scores);
-    highestScoreArr = highestScore(maps, matches, players, scores);
+    const pscoreArr = pscores(maps, matches, players, scores);
+    const playcountArr = playcounts(maps, matches, players, scores);
+    const avgScoreArr = avgScore(maps, matches, players, scores);
+    const avgAccArr = avgAcc(maps, matches, players, scores);
+    const highestScoreArr = highestScore(maps, matches, players, scores);
 
 
     data = [];

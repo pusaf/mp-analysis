@@ -16,10 +16,10 @@ const MapToggle = ({ map, index, setMaps }) => {
 
     // Display mods in readable manner
     let modStr = "";
-    if (map.game.mods.length == 0) {
+    if (map.mods.length == 0) {
         modStr = "FM"
     } else {
-        modStr = map.game.mods.reduce((str, mod, index) => {
+        modStr = map.mods.reduce((str, mod, index) => {
             if (index == 0) {
                 return str + mod;
             } else {

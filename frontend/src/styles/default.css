@@ -12,6 +12,8 @@
     --color-button-unavailable: rgb(68, 38, 130);
 
     --nav-height: 60px;    
+    --main-width: 70%;
+    --main-max-width: 1800px;
 }
 
 html, body {

@@ -1,16 +1,25 @@
 .navbar {
-    background-color: darkblue;
-    color: white;
-    padding: 0px ;
+    padding: 0 ;
+
+    width: 70%;
+    max-width: var(--main-max-width);
 
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
     position: sticky;
     top: 0;
     z-index: 999;
 
     height: var(--nav-height);
+}
+
+.navContainer {
+    background-color: darkblue;
+    color: white;
+
+    display: flex;
+    justify-content: center;
 }
 
 .navbuttons {
@@ -30,6 +39,5 @@ nav a {
 
 .flexContainer {
     display: flex;
-    gap: 20px;
     align-items: center;
 }

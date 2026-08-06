@@ -6,7 +6,7 @@ const MatchList = ({selectedMatches, setSelectedMatches}) => {
         <div className={styles.card}>
             <h2>Selected Matches ({selectedMatches.length})</h2>
             <h3>These matches will be included in your analysis.</h3>
-            <ul>
+            <ul className={styles.matchList}>
                 {selectedMatches.map((mp) => {
                     return <MatchDisplay key={mp.match.id} mp={mp}/>
                 })}

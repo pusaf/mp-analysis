@@ -1,0 +1,16 @@
+.mp {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+
+    background-color: var(--color-tertiary);
+    border-bottom: 1px solid var(--color-border);
+    padding: 20px;
+
+    
+}
+
+
+.mp:last-child {
+    border: none;
+}

@@ -58,8 +58,6 @@ const Analyze = () => {
                 }
             });
 
-            console.log(updated);
-
             return updated;
         });
     }, [uniqueMaps]);

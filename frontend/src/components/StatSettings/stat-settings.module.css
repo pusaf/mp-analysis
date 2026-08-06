@@ -1,7 +1,8 @@
 .flexContainer {
     display: flex;
 
-    min-width: calc(70% + 40px);
+    width: calc(70% + 40px);
+    max-width: calc(var(--main-max-width) + 40px);
     padding: 20px 30px;
 
     justify-content: space-between;

@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-router.post("/", () => {
-    console.log("get calculated stats - wip");
-})
+const { getIndividualPerformance } = require('../controllers/analysisController');
+
+router.post("/individual/performance", getIndividualPerformance);
 
 module.exports = router;
