@@ -1,12 +1,15 @@
 import styles from './analyze.module.css';
-import MatchInput from '../../components/MatchInput/MatchInput.jsx';
-import StatSettings from '../../components/StatSettings/StatSettings.jsx';
+import AnalysisTabs from '../../components/AnalysisTabs/AnalysisTabs';
+
 import { useState, useMemo, useEffect } from 'react';
+import { Outlet } from 'react-router';
 
 const Analyze = () => {
-    const [tab, setTab] = useState("mapInput");
+    const [tab, setTab] = useState("mappoolSelection");
     const [selectedMatches, setSelectedMatches] = useState([]);
     const [maps, setMaps] = useState([]);
+    const [statsReady, setStatsReady] = useState(false);
+
 
     // Generates array of unique map + mod combos every time selectedMatches is updated
     const uniqueMaps = useMemo(() => {
@@ -62,13 +65,19 @@ const Analyze = () => {
         });
     }, [uniqueMaps]);
 
+
     return (<>
         <div className={styles.analyzePage}>
-            <div>analysis page</div>
-            <div className={styles.flexCenter}>
-                {tab === 'mapInput' && <MatchInput selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches}/>}
-                {tab === 'mapInput' && <StatSettings selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} maps={maps} setMaps={setMaps}/>}
-            </div>
+            <AnalysisTabs tab={tab} setTab={setTab} statsReady={statsReady} />
+            <Outlet 
+                context={{
+                    selectedMatches,
+                    setSelectedMatches,
+                    maps,
+                    setMaps,
+                    setStatsReady
+                }}
+            />
         </div>
     </>)
 }

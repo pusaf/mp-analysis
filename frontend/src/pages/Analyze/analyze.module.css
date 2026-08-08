@@ -1,11 +1,7 @@
-.flexCenter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 
-}
 
 .analyzePage {
     background-color: var(--color-background);
     flex: 1;
+
 }
