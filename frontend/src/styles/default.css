@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --color-primary: rgb(22, 18, 58);
+    --color-primary: rgb(13, 15, 51);
     --color-secondary: rgb(14, 15, 47);
     --color-tertiary: rgb(30, 27, 72);
     --color-accent: rgb(145, 92, 255);
@@ -26,7 +26,7 @@ html, body {
 
 .layout {
     min-height: 100vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }

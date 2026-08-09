@@ -9,7 +9,7 @@
     padding: 20px 20px;
     border-radius: 15px;
 
-    background-color: var(--color-primary);
+    background-color: var(--color-secondary);
     border: 1px solid var(--color-border);
     color: var(--color-text-1);
 
@@ -24,17 +24,17 @@
 
 .card textarea {
     align-self: stretch;
-    min-height: 100px;
+    min-height: 10vh;
     border: 1px solid var(--color-border);
     border-radius: 5px;
     padding: 10px;
     font-size: 12px;
-    resize: vertical;
+    resize: none;
 
     margin-top: 10px;
 
     color: var(--color-text-2);
-    background-color: var(--color-secondary);
+    background-color: var(--color-background);
 }
 
 .card textarea:focus {

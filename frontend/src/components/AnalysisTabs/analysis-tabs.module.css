@@ -26,6 +26,8 @@
         black calc(100% - var(--extra-line-length)),
         transparent 100%
     );
+
+    font-size: clamp(18px, 1.5vh, 24px);
 }
 
 
@@ -34,7 +36,6 @@
     color: var(--color-text-1);
     text-decoration: none;
     font-weight: bold;
-    font-size: 20px;
     
     padding: 10px 50px;
 

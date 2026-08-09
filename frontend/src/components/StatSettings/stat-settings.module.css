@@ -1,7 +1,7 @@
 .flexContainer {
     display: flex;
 
-    width: calc(70% + 40px);
+    width: calc(var(--main-width) + 40px);
     max-width: calc(var(--main-max-width) + 40px);
     padding: 20px 30px;
 
