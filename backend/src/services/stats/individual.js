@@ -237,13 +237,15 @@ function highestScore(maps, matches, players, scores) {
                 
                 return ({
                     max: (newScore > best.max) ? newScore : best.max,
+                    rank : (newScore > best.max) ? current.score.rank : best.rank,
                     map: (newScore > best.max) ? maps[current.map] : best.map
                 });
-            }, {max: 0, map: null});
+            }, {max: 0, rank: null, map: null});
             
+
             data.push({
                 'user': players[i],
-                'bestScore': best.max,
+                'bestScore': {score: best.max, rank: best.rank},
                 'bestMap': best.map
             })
         }

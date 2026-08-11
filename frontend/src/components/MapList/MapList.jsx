@@ -1,5 +1,5 @@
 import styles from './map-list.module.css';
-import MapToggle from '../MapToggle/MapToggle';
+import MapToggle from './MapToggle/MapToggle';
 
 const MapList = ({ maps, setMaps }) => {
     return (<>

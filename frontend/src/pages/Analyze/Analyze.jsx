@@ -2,13 +2,14 @@ import styles from './analyze.module.css';
 import AnalysisTabs from '../../components/AnalysisTabs/AnalysisTabs';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation, Navigate } from 'react-router';
 
 const Analyze = () => {
     const [tab, setTab] = useState("mappoolSelection");
     const [selectedMatches, setSelectedMatches] = useState([]);
     const [maps, setMaps] = useState([]);
     const [statsReady, setStatsReady] = useState(false);
+    const [stats, setStats] = useState([]);
 
 
     // Generates array of unique map + mod combos every time selectedMatches is updated
@@ -65,6 +66,10 @@ const Analyze = () => {
         });
     }, [uniqueMaps]);
 
+    // If stats aren't ready, forcefully navigate back to mappool selection
+    if (!statsReady && useLocation().pathname !== "/analyze") {
+        return <Navigate to="/analyze" replace />;
+    }
 
     return (<>
         <div className={styles.analyzePage}>
@@ -75,7 +80,9 @@ const Analyze = () => {
                     setSelectedMatches,
                     maps,
                     setMaps,
-                    setStatsReady
+                    setStatsReady,
+                    stats,
+                    setStats
                 }}
             />
         </div>

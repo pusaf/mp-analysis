@@ -1,5 +1,5 @@
 import styles from './match-list.module.css';
-import MatchDisplay from '../MatchDisplay/MatchDisplay';
+import MatchDisplay from './MatchDisplay/MatchDisplay';
 
 const MatchList = ({selectedMatches, setSelectedMatches}) => {
     return (<>

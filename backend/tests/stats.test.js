@@ -40,8 +40,8 @@ test("Single 1v1 match playcount", async() => {
     expect(stats[1].avgAcc).toBeCloseTo(0.731);
 
     // best score
-    expect(stats[0].bestScore).toBe(451547);
-    expect(stats[1].bestScore).toBe(280081);
+    expect(stats[0].bestScore.score).toBe(451547);
+    expect(stats[1].bestScore.score).toBe(280081);
     expect(stats[0].bestMap.id).toBe(4072324);
     expect(stats[1].bestMap.id).toBe(5132406);
 })

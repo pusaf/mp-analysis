@@ -1,7 +1,7 @@
 import styles from './generate-stats.module.css';
 import Button from '../Button/Button';
 
-const GenerateStats = ({selectedMatches, maps, setStatsReady}) => {
+const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats}) => {
 
 
     // WIP function
@@ -26,6 +26,13 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady}) => {
         }
 
         const individualPerformance = await individualPerformanceResponse.json();
+
+        // individualPerformance.forEach((person) => console.log(`${person.player.username}: ${person.pscore}, ${person.avgScore}`))
+        // individualPerformance.forEach((person) => console.log(person));
+
+        // stats[0] is individual pscore
+        // stats[1] is 
+        setStats([individualPerformance]);
 
         setStatsReady(true);
     };
