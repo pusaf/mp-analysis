@@ -1,3 +1,283 @@
+.flexCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.card a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.card a:hover,
+.card a:hover .mapName,
+.card a:hover .diff {
+    text-decoration-line: underline;
+}
+
+.card {
+    background-color: var(--color-primary);
+    padding: 20px 0;
+    border-radius: 15px;
+    border: 1px solid var(--color-border);
+
+    --main-size: 18px;
+}
+
+.card table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+
+
 .card th, td {
-    border: 1px solid white;
+    text-align: center;
+    vertical-align: center;
+}
+
+.card thead {
+    background-color: var(--color-tertiary);
+    color: var(--color-text-2);
+
+}
+
+.card th:nth-child(3) {
+    padding-right: 200px;
+}
+
+.pfp {
+    width: 20px;
+}
+
+.card tbody tr:nth-child(even) {
+    background-color: var(--color-primary);
+}
+
+.card tbody tr:nth-child(odd) {
+    background-color: var(--color-secondary);
+}
+
+.card th {
+    padding: 10px;
+
+    font-size: calc(0.6 * var(--main-size));
+    font-weight: 600;
+}
+
+.card td {
+    padding: 10px 5px;
+    vertical-align: center;
+}
+
+
+.card th:nth-child(3) {
+    text-align: start;
+}
+
+.card td:nth-child(4) {
+    text-align: start;
+}
+
+.card td:nth-child(5), .card td:nth-child(4) {
+    color: var(--color-text-1);
+    font-weight: 600;
+    font-size: calc(var(--main-size) * 0.9);
+    height: calc(var(--main-size) * 0.9);
+    line-height: calc(var(--main-size) * 0.9);
+}
+
+.card td:nth-child(5),
+.card th:nth-child(4) {
+    padding-right: 25px;
+}
+
+.card td:nth-child(6),
+.card th:nth-child(5) {
+    padding-left: 25px;
+}
+
+.card td:nth-child(6) {
+    position: relative;
+}
+
+.card tbody tr:first-child td:nth-child(6)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-text-2);
+}
+.card tbody  td:nth-child(6)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-text-2);
+}
+
+.card tbody tr:last-child td:nth-child(6)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 5px;
+    width: 1px;
+    background: var(--color-text-2);
+}
+
+
+
+.card td:nth-child(2),
+.card td:nth-child(6),
+.card td:nth-child(7),
+.card td:nth-child(8),
+.card td:nth-child(10),
+.card td:nth-child(11),
+.card td:nth-child(12) {
+    color:var(--color-text-3);
+    font-size: calc(var(--main-size) * 0.8);
+}
+
+.card td:nth-child(9) {
+    font-weight: 600;
+}
+
+
+.card th:nth-child(7) {
+    padding-right: 25px;
+    padding-left: 5px;
+    text-align: center;
+}
+.card td:nth-child(8) {
+    padding-right: 25px;
+    text-align: center;
+}
+
+
+.card th:last-child {
+    text-align: center;
+}
+
+.card td:nth-child(9) {
+    padding-left: 25px;
+    padding-right: 20px;
+    position: relative
+}
+
+
+
+
+.card tbody tr:first-child td:nth-child(9)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 5px;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-text-2);
+}
+.card tbody  td:nth-child(9)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-text-2);
+}
+
+.card tbody tr:last-child td:nth-child(9)::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 5px;
+    width: 1px;
+    background: var(--color-text-2);
+}
+
+
+.card td:nth-child(11) {
+    max-width: 200px;
+}
+
+.mapName {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.diff {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.diffContainer {
+    display: inline-flex;
+    max-width: 100%;
+}
+
+.diffContainer::before {
+    content: '[';
+}
+
+.diffContainer::after {
+    content: ']';
+}
+
+.card td:last-child {
+    padding-right: 15px;
+}
+
+
+
+
+.card td:nth-child(3) img {
+    height: calc(var(--main-size) * 1.5);
+    width: calc(var(--main-size) * 1.5);
+    display: block;
+}
+
+.card td:first-child img {
+    width: calc(0.75 * var(--main-size));
+    height: calc(0.75 * var(--main-size));
+    display: block;
+
+    padding-left: 10px;
+}
+
+
+
+.s {
+    color: var(--color-s);
+}
+
+.a {
+    color: var(--color-a);
+}
+
+.b {
+    color: var(--color-b);
+}
+
+.c {
+    color: var(--color-c);
+}
+
+.d {
+    color: var(--color-d);
+}
+
+.f {
+    color: var(--color-f);
 }

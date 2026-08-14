@@ -1,8 +1,9 @@
 import styles from './generate-stats.module.css';
 import Button from '../Button/Button';
+import { useNavigate } from 'react-router';
 
 const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats}) => {
-
+    const navigate = useNavigate();
 
     // WIP function
     async function getStats() {
@@ -35,6 +36,7 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats}) => {
         setStats([individualPerformance]);
 
         setStatsReady(true);
+        navigate('individual');
     };
 
     return (<>
