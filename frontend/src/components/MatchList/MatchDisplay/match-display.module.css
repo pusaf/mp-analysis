@@ -2,10 +2,11 @@
     list-style-type: none;
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     background-color: var(--color-tertiary);
     border-bottom: 1px solid var(--color-border);
-    padding: 10px;
+    padding: 15px;
 
     font-size: 12px;
 
@@ -14,4 +15,44 @@
 
 .mp:last-child {
     border: none;
+}
+
+.mpDropdown {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+
+}
+
+.dropdown {
+    display: block;
+    width: 0; 
+    height: 0; 
+    flex-shrink: 0;
+
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent; 
+    
+    border-right: 10px solid var(--color-text-1); 
+    transition: transform 0.2s ease;
+
+}
+
+.expanded .dropdown {
+    transform: rotate(-90deg);
+}
+
+.mp button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+.removeButton {
+    font-size: 15px ;
+    font-weight: bold;
+    color: red;
 }

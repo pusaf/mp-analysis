@@ -47,6 +47,7 @@ const Analyze = () => {
         setMaps(prev => {
             const updated = [...prev];
 
+            // Add maps that aren't already in the map list
             uniqueMaps.forEach(newMap => {
                 const exists = updated.some(
                     map =>
@@ -62,7 +63,16 @@ const Analyze = () => {
                 }
             });
 
-            return updated;
+            // Delete maps that are no longer in any selected match
+            return updated.filter(currentMap => {
+                const exists = uniqueMaps.some(
+                    map =>
+                        map.id === currentMap.id &&
+                        map.mods === currentMap.mods
+                );
+
+                return exists;
+            })
         });
     }, [uniqueMaps]);
 
