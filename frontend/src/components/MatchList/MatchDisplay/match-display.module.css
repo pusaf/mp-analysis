@@ -1,14 +1,17 @@
 .mp {
     list-style-type: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex: 1;
 
     background-color: var(--color-tertiary);
     border-bottom: 1px solid var(--color-border);
     padding: 15px;
 
     font-size: 12px;
+
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
 }
 
@@ -19,9 +22,11 @@
 
 .mpDropdown {
     display: flex;
-    gap: 15px;
     align-items: center;
+    gap: 15px;
 
+    flex-shrink: 0;
+    padding-left: 10px;
 }
 
 .dropdown {
@@ -55,4 +60,17 @@
     font-size: 15px ;
     font-weight: bold;
     color: red;
+}
+
+
+.extendedDisplay li {
+    list-style-type: none;
+}
+
+
+.name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

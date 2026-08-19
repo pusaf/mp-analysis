@@ -4,7 +4,6 @@ import PerformanceRow from './PerformanceRow';
 const PerformanceLeaderboard = ({ stats }) => {
 
     const sortedStats = stats.sort((a, b) => b.pscore - a.pscore);
-    sortedStats.forEach((user) => console.log(user.bestScore));
 
     return (<div className={styles.flexCenter}>
         <div className={styles.card}>

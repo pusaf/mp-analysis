@@ -24,6 +24,7 @@
     --main-width: 70%;
     --main-max-width: 1800px;
 
+    color-scheme: dark;
 }
 
 html, body {
