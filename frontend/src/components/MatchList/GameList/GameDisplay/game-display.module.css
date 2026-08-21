@@ -1,6 +1,75 @@
-.game {
 
+.game {
+    background-color: var(--color-secondary);
+    min-width: 0;
+}
+
+
+
+.gameHeader {
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 10px 10px 10px;
+    
     background-size: cover;
     background-position: center;
+}
 
+.game li {
+    padding: 5px 5px 0 5px;
+}
+
+.score {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+
+    border-radius: 5px;
+    background: linear-gradient(to right, var(--color-tertiary) 0%, var(--color-primary) 20%);
+    border: 1px solid var(--color-border);
+
+    min-width: 0;
+}
+
+.redTeam {
+    background: linear-gradient(to right, darkred 0%, var(--color-primary) 20%);
+}
+
+.blueTeam {
+    background: linear-gradient(to right, darkblue, var(--color-primary) 20%);
+}
+
+
+
+.game li:last-child {
+    padding-bottom: 5px;
+}
+
+
+.score2 {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 2px 10px ;
+    gap: 15px;
+
+    min-width: 0;
+    flex-wrap: wrap;
+
+}
+
+
+.label {
+    padding-right: 3px;
+    font-size: 12px;
+    color: var(--color-text-2);
+}
+
+.scoreStat {
+    font-weight: bold;   
+}
+
+.hitCount {
+    font-size: 14px;
 }

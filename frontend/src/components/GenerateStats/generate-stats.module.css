@@ -1,8 +1,6 @@
 .card {
     flex: 1 1 auto;
 
-    width: calc(70%);
-    max-width: var(--main-max-width);
 
     padding: 20px 20px;
     border-radius: 15px;

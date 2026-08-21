@@ -8,12 +8,14 @@ const MatchList = ({selectedMatches, setSelectedMatches}) => {
 
     const [activeMatch, setActiveMatch] = useState(null);
 
+    // TODO: implement setting active match by clicking on corresponding match
+
     useEffect(() => {
-        // TEmporary jsut assigning first in selected matches
-        if (selectedMatches.length > 0) {
+        if (selectedMatches.length == 0) {
+            setActiveMatch(null);
+        } else if (selectedMatches.length == 1) {
             setActiveMatch(selectedMatches[0]);
         }
-        console.log('heyyy');
     }, [selectedMatches]);
 
     return (<>

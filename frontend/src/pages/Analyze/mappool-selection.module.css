@@ -1,6 +1,13 @@
-.flexCenter {
+.container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
+    
+    min-width: 1040px;
+    width: fit-content;
+}
 
+.flexCenter {
+    display: flex;
+    justify-content: center;
 }

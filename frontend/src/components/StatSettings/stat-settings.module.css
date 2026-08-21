@@ -1,9 +1,8 @@
 .flexContainer {
     display: flex;
 
-    width: calc(var(--main-width) + 40px);
-    max-width: calc(var(--main-max-width) + 40px);
-    padding: 20px 30px;
+    flex: 1 1 auto;
+    padding: 20px 0;
 
     justify-content: space-between;
     
