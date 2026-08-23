@@ -13,7 +13,9 @@ const MappoolSelection = () => {
         maps,
         setMaps,
         setStatsReady,
-        setStats
+        setStats, 
+        excludedGames,
+        setExcludedGames
     } = useOutletContext();
 
     const [readyToGenerate, setReadyToGenerate] = useState(false);
@@ -35,7 +37,7 @@ const MappoolSelection = () => {
         <div className={styles.flexCenter}>
             <div className={styles.container}>
                 <MatchInput selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches}/>
-                <StatSettings selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} maps={maps} setMaps={setMaps}/>
+                <StatSettings selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} maps={maps} setMaps={setMaps} excludedGames={excludedGames} setExcludedGames={setExcludedGames}/>
                 {readyToGenerate ? <GenerateStats selectedMatches={selectedMatches} maps={maps} setStatsReady={setStatsReady} setStats={setStats} />: <></>}
             </div>
         </div>

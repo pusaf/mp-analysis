@@ -1,7 +1,7 @@
 import styles from './game-list.module.css';
 import GameDisplay from './GameDisplay/GameDisplay';
 
-const GameList = ({ mp }) => {
+const GameList = ({ mp, excludedGames, setExcludedGames }) => {
 
 
     const games = mp?.events.filter((event) => {
@@ -18,7 +18,7 @@ const GameList = ({ mp }) => {
                     ""
                     :
                     <ul>
-                        {games.map(game => <GameDisplay game={game} users={mp.users} key={`MP${mp.match.id}GAME${game.id}`} />)}
+                        {games.map(game => <GameDisplay game={game} users={mp.users} key={`MP${mp.match.id}GAME${game.id}`} excludedGames={excludedGames} setExcludedGames={setExcludedGames} />)}
                     </ul>
                 }
             </div>

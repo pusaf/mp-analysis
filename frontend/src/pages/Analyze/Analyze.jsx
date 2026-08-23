@@ -8,6 +8,7 @@ const Analyze = () => {
     const [tab, setTab] = useState("mappoolSelection");
     const [selectedMatches, setSelectedMatches] = useState([]);
     const [maps, setMaps] = useState([]);
+    const [excludedGames, setExcludedGames] = useState(new Set());
     const [statsReady, setStatsReady] = useState(false);
     const [stats, setStats] = useState([]);
 
@@ -92,7 +93,9 @@ const Analyze = () => {
                     setMaps,
                     setStatsReady,
                     stats,
-                    setStats
+                    setStats,
+                    excludedGames, 
+                    setExcludedGames
                 }}
             />
         </div>
