@@ -2,7 +2,7 @@ import styles from './generate-stats.module.css';
 import Button from '../Button/Button';
 import { useNavigate } from 'react-router';
 
-const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats}) => {
+const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats, excludedGames}) => {
     const navigate = useNavigate();
 
     // WIP function
@@ -17,7 +17,8 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats}) => {
             }, 
             body: JSON.stringify({
                 maps: selectedMaps,
-                matches: matchIDs
+                matches: matchIDs,
+                excluded: Array.from(excludedGames)
             })
         })
 

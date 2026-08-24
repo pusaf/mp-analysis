@@ -37,7 +37,7 @@ const PerformanceRow = ({ userStats, index }) => {
                 onClick={(e) => e.stopPropagation()}>
                     {userStats.player.username}
             </a></td>
-            <td>{userStats.pscore.toFixed(2)}</td>
+            <td>{userStats.pscore.toFixed(3)}</td>
             <td>{userStats.mapsPlayed}/{userStats.maxMapsPlayed}</td>
             <td>{Math.round(userStats.avgScore).toLocaleString("en-us")}</td>
             <td>{(userStats.avgAcc * 100).toFixed(2)}%</td>

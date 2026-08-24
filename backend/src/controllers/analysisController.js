@@ -5,10 +5,10 @@ module.exports = { getIndividualPerformance };
 
 async function getIndividualPerformance(req, res) {
     try {
-        const { maps, matches } = req.body;
-
+        const { maps, matches, excluded } = req.body;
+        
         const matchArr = await db.getMatches(matches);
-        const stats = performanceStats(maps, matchArr);
+        const stats = performanceStats(maps, matchArr, excluded);
 
         if (!stats) {
             return res.status(400).json({

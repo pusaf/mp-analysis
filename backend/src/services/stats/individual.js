@@ -15,21 +15,24 @@ module.exports = { performanceStats };
  * @param {Array<Map>} maps 
  * @param {Array<Match>} matches 
  */
-function performanceStats(maps, matches) {
+function performanceStats(maps, matches, excluded) {
     if (!matches || !maps) {
         return false;
     }
-    
+
+    // Filter out games that were excluded
+    const filteredMatches = filterGames(matches, excluded);
+
     // Get common information needed for each statistic calculation
-    players = getUniquePlayers(matches);
-    scores = players.map(player => getPlayerScores(matches, player.id, maps));
+    players = getUniquePlayers(filteredMatches);
+    scores = players.map(player => getPlayerScores(filteredMatches, player.id, maps));
 
     // Generate statistics for each player
-    const pscoreArr = pscores(maps, matches, players, scores);
-    const playcountArr = playcounts(maps, matches, players, scores);
-    const avgScoreArr = avgScore(maps, matches, players, scores);
-    const avgAccArr = avgAcc(maps, matches, players, scores);
-    const highestScoreArr = highestScore(maps, matches, players, scores);
+    const pscoreArr = pscores(maps, filteredMatches, players, scores);
+    const playcountArr = playcounts(maps, filteredMatches, players, scores);
+    const avgScoreArr = avgScore(maps, filteredMatches, players, scores);
+    const avgAccArr = avgAcc(maps, filteredMatches, players, scores);
+    const highestScoreArr = highestScore(maps, filteredMatches, players, scores);
 
 
     data = [];
@@ -67,7 +70,7 @@ function performanceStats(maps, matches) {
  * @param {Array<Player>} players 
  * @param {{score: Array<Score>, map: Number}} scores 
  * 
- * @returns {Array<{user: Player, pscore: Number}>}
+ * @returns {Array<{user: Player, performanceScore: Number}>}
  */
 function pscores(maps, matches, players, scores) {
     // Get the matchGames from matches
@@ -81,16 +84,16 @@ function pscores(maps, matches, players, scores) {
     });
 
     // Get data needed to calculate pscore
-    medians = medianScores(maps, matchGames); 
-    avgMapsPlayed = matches.map(match => getAvgMapsPlayed(match, maps));
-    matchesPlayed = players.map((player) => {
+    const medians = medianScores(maps, matchGames); 
+    const avgMapsPlayed = matches.map(match => getAvgMapsPlayed(match, maps));
+    const matchesPlayed = players.map((player) => {
         return matches.map((match) => playerParticipated(match, player.id, maps));
     });
 
     // Calculate pscore for each player
-    data = [];
+    const data = [];
     for (let i = 0; i < players.length; i++) {
-        performanceScore = pscore(scores[i], medians, matchesPlayed[i], avgMapsPlayed);
+        const performanceScore = pscore(scores[i], medians, matchesPlayed[i], avgMapsPlayed);
         if (performanceScore) {
             data.push({
                 'user': players[i],
@@ -119,7 +122,7 @@ function pscore(scores, medians, matchesPlayed, meanMapsPlayed) {
     let performanceScore = 0;
 
     for (let i = 0; i < scores.length; i++) {
-        performanceScore += modNormalizer(scores[i].score) / medians[scores[i].map];
+        performanceScore += scores[i].score.score / medians[scores[i].map];
     }
     performanceScore /= scores.length;
 
@@ -183,7 +186,7 @@ function avgScore(maps, matches, players, scores) {
 
     for (let i = 0; i< players.length; i++) {
         if (scores[i].length > 0) {
-            let avg = scores[i].reduce((total, value) => total + value.score.score, 0)/scores[i].length;
+            let avg = scores[i].reduce((total, value) => total + modNormalizer(value.score), 0)/scores[i].length;
             
             data.push({
                 'user': players[i],
@@ -272,6 +275,7 @@ function leaderboard() {
  *
  * @param {Match[]} matches
  * @param {number} playerId
+ * @param {Map[]} maps
  * @returns {{score: Array<Score>, map: number}}
  */
 function getPlayerScores(matches, playerId, maps) {
@@ -310,4 +314,28 @@ function getPlayerScores(matches, playerId, maps) {
 }
 
 
+/**
+ * Filters out excluded games from matches 
+ * @param {Match[]} matches 
+ * @param {Number[]} excluded 
+ * @returns {Match[]}
+ */
+function filterGames(matches, excluded) {
+    return matches.map((match) => {
+        const filteredEvents = match.events.filter((event) => {
+            const game = event.game;
 
+            if (!game) return false;
+            if (excluded.some(id => id == game.id)) return false;
+            return true;
+        })
+
+        return {
+            'match': match.match,
+            'events': filteredEvents,
+            'users': match.users,
+            'first_event_id': match.first_event_id,
+            'latest_event_id': match.latest_event_id
+        }
+    })
+}

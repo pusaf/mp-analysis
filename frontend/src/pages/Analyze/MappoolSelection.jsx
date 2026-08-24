@@ -38,7 +38,7 @@ const MappoolSelection = () => {
             <div className={styles.container}>
                 <MatchInput selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches}/>
                 <StatSettings selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} maps={maps} setMaps={setMaps} excludedGames={excludedGames} setExcludedGames={setExcludedGames}/>
-                {readyToGenerate ? <GenerateStats selectedMatches={selectedMatches} maps={maps} setStatsReady={setStatsReady} setStats={setStats} />: <></>}
+                {readyToGenerate ? <GenerateStats selectedMatches={selectedMatches} maps={maps} setStatsReady={setStatsReady} setStats={setStats} excludedGames={excludedGames} />: <></>}
             </div>
         </div>
     </>)

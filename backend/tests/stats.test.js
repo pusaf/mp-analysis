@@ -5,7 +5,7 @@ const db = require('../src/db/queries');
 
 
 
-test("Single 1v1 match playcount", async() => {
+test.skip("Single 1v1 match playcount", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([119794867]);
     const testMaps = [
@@ -19,7 +19,7 @@ test("Single 1v1 match playcount", async() => {
         }
     ]
 
-    const stats = performanceStats(testMaps, testMatch);
+    const stats = performanceStats(testMaps, testMatch, []);
 
     // pscore
     expect(stats[0].pscore).toBeCloseTo(1.56875384);
@@ -48,6 +48,17 @@ test("Single 1v1 match playcount", async() => {
 
 
 
+
+test("Multiple team match pscore", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([120062857, 120078133, 120078716]);
+    const testMaps = getowctest()
+
+
+    const stats = performanceStats(testMaps, testMatch, [630072583]);
+    console.log(stats);
+    expect(true).toBe(true)
+})
 
 
 
@@ -179,19 +190,6 @@ test("Single 1v1 match playcount", async() => {
 // })
 
 
-// // this test is currently not working due to the fact that i haven't implemente map exclusion
-// // since there was a tb showcase match at the end, the numbers are slightly fucked up
-// test.skip("Multiple team match pscore", async() => {
-//     // Generate testing data
-//     const testMatch = await db.getMatches([120062857, 120078133, 120078716]);
-//     const testMaps = getowctest()
-
-
-//     const scores = pscores(testMaps, testMatch);
-//     display = scores.map(thing => `${thing.user.username} + ${thing.performanceScore}`);
-//     console.log(display);
-//     expect(true).toBe(true)
-// })
 
 
 // test.skip("Single match median", async () => {

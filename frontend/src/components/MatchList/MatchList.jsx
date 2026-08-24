@@ -13,7 +13,7 @@ const MatchList = ({selectedMatches, setSelectedMatches, excludedGames, setExclu
     useEffect(() => {
         if (selectedMatches.length == 0) {
             setActiveMatch(null);
-        } else if (selectedMatches.length == 1) {
+        } else if (selectedMatches.length >= 1 && !activeMatch) {
             setActiveMatch(selectedMatches[0]);
         }
     }, [selectedMatches]);

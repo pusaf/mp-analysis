@@ -20,7 +20,7 @@ function medianScores(maps, matchGames) {
 // Gets the median score of an array of scores
 // Takes in an array of score objects
 function medianScore(scores) {
-    values = scores.map((score) => modNormalizer(score));
+    values = scores.map((score) => score.score);
     if (values.length == 0) {
         return null;
     }
