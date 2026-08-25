@@ -45,7 +45,7 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats, excluded
 
     const gameCount = selectedMatches.reduce((total, match) => {
         const games = match.events.filter((event) => {
-            if (!event.game || !event.game.end_time) {
+            if (!event.game || !event.game.end_time || !event.game.beatmap) {
                 return false;
             } else if (excludedGames.has(event.game.id)) {
                 return false;

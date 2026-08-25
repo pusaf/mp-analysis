@@ -5,9 +5,11 @@ import Button from '../Button/Button';
 
 const MatchInput = ({selectedMatches, setSelectedMatches}) => {
     const [matchInputs, setMatchInputs] = useState("");
+    const [loading, setLoading] = useState(false);
 
     async function submitMatches(e) {
         e.preventDefault();
+        setLoading(true);
 
         // Create list of ids and filter out all non mp IDs
         const ids = matchInputs
@@ -42,6 +44,7 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
             )
         );
         setSelectedMatches([...selectedMatches, ...newMatches]);
+        setLoading(false);
     }
 
     return (<>
@@ -56,7 +59,10 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
                 value={matchInputs}
                 onChange={(e) => setMatchInputs(e.target.value)}
             />
-            <Button enabled={matchInputs.trim()} text="Get Matches"/>
+            <div className={styles.input}>
+                <Button enabled={matchInputs.trim()} text="Get Matches"/>
+                {loading? <span className={styles.loader}></span> : ''}
+            </div>
         </form>
         
     </>)

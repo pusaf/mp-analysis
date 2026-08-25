@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const rateLimit = require('express-rate-limit');
 
 const { getIndividualPerformance } = require('../controllers/analysisController');
 
@@ -10,6 +11,14 @@ const { getIndividualPerformance } = require('../controllers/analysisController'
 // /individual/placements (some form of team seeding)
 // / (a route that gets all of the above stats to reduce recalculation?)
 
-router.post("/individual/performance", getIndividualPerformance);
+
+const generalLimiter = rateLimit({
+    windowMs: 60 * 1000,
+    limit: 60,
+    standardHeaders: "draft-8",
+    legacyHeaders: false,
+});
+
+router.post("/individual/performance", generalLimiter, getIndividualPerformance);
 
 module.exports = router;

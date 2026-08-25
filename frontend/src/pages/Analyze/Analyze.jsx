@@ -19,7 +19,7 @@ const Analyze = () => {
 
         selectedMatches.forEach((mp) => {
             mp.events
-            .filter((event) => (event.detail.type == "other"))
+            .filter((event) => (event.game && event.game.beatmap))
             .forEach((map) => {
 
                 const newMap = {

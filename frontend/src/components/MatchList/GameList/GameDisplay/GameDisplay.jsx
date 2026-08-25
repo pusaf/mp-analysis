@@ -3,6 +3,11 @@ import { useState, useEffect } from 'react';
 import { arraysEqual } from '../../../../utils/generalUtils';
 
 const GameDisplay = ({ game, users, excludedGames, setExcludedGames, maps }) => {
+    // Deleted beatmap edge case
+    if (!game.beatmap) {
+        return;
+    }
+
 
     // Don't bother allowing the map to be added/removed from excludedGames if the map isn't active 
     const [inactive, setInactive] = useState(

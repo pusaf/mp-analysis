@@ -5,7 +5,11 @@ const { getMatch } = require('../services/osu/osuServices');
 async function getMatches(ids) {
     const matches = await Promise.all(
         ids.map(async (id) => {
-            const result = await pool.query("SELECT (data) FROM matches WHERE id = ($1)", [id]);
+            const result = await pool.query({
+                text: "SELECT (data) FROM matches WHERE id = ($1)",
+                values: [id],
+                statement_timeout: 10_000
+            });
 
             return result.rows.length
                 ? result.rows[0].data
@@ -13,9 +17,7 @@ async function getMatches(ids) {
         })
     )
 
-    matches.filter(match => match !== false);
-
-    return matches;
+    return matches.filter(match => match !== false);
 }
 
 
@@ -30,15 +32,16 @@ async function upsertMatch(id) {
     }
 
     // add info into match db
-    await pool.query(
-        `
-        INSERT INTO matches (id, data)
-        VALUES ($1, $2)
-        ON CONFLICT (id)
-        DO UPDATE SET data = EXCLUDED.data
+    await pool.query({
+        text: `
+            INSERT INTO matches (id, data)
+            VALUES ($1, $2)
+            ON CONFLICT (id)
+            DO UPDATE SET data = EXCLUDED.data
         `,
-        [id, matchObject]
-    );
+        values: [id, matchObject],
+        statement_timeout: 10_000
+    });
     
     return matchObject;
 }

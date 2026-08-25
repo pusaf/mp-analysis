@@ -1,4 +1,14 @@
 const { getAccessToken } = require("./auth");
+const Bottleneck = require('bottleneck');
+
+const osuLimiter = new Bottleneck({
+    reservoir: 64,
+    reservoirRefreshAmount: 64,
+    reservoirRefreshInterval: 60 * 1000,
+    minTime: 1000,
+    maxConcurrent: 1
+});
+
 
 /**
  * Gets a Match object from the osu API
@@ -15,13 +25,17 @@ async function getMatch(id) {
             url.searchParams.set("before", before);
         }
 
-        const response = await fetch(url, {
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`,
-                "x-api-version": "20220704"
-            }
+        const response = await osuLimiter.schedule(() => {
+            return fetch(url, {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`,
+                    "x-api-version": "20220704"
+                },
+                signal: AbortSignal.timeout(10_000)
+            });
         });
+        
 
         if (response.status === 404) {
             console.log("match doesn't exist");
@@ -49,7 +63,7 @@ async function getMatch(id) {
         users.set(user.id, user);
     });
 
-    while (events[0].id !== match.first_event_id) {
+    while (events.length > 0 && events[0].id !== match.first_event_id) {
         const previous = await fetchMatch(events[0].id);
 
         if (!previous) {

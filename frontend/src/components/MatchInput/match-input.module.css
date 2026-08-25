@@ -49,3 +49,37 @@
         width: calc(100% - 30px);
     }
 }
+
+
+.input {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.card button {
+    margin: 0;
+}
+
+.loader {
+  --size: 0.5px;
+
+    width: calc(48 * var(--size));
+    height: calc(48 * var(--size));
+    border: calc(5 * var(--size)) solid white;
+    border-bottom-color: var(--color-accent);
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

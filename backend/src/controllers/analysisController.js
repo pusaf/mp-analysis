@@ -7,6 +7,12 @@ async function getIndividualPerformance(req, res) {
     try {
         const { maps, matches, excluded } = req.body;
         
+        if (!Array.isArray(matches) || matches.length > 100) {
+            return res.status(400).json({
+                error: "A maximum of 20 matches can be analyzed at once"
+            });
+        }
+
         const matchArr = await db.getMatches(matches);
         const stats = performanceStats(maps, matchArr, excluded);
 
@@ -19,7 +25,7 @@ async function getIndividualPerformance(req, res) {
         res.json(stats);
 
     } catch (err) {
-        console.err(err);
+        console.error(err);
 
         res.status(500).json({error: "Failed to get stats"});
     }
