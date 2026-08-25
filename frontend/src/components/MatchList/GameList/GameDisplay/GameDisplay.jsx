@@ -1,11 +1,25 @@
 import styles from './game-display.module.css';
+import { useState, useEffect } from 'react';
+import { arraysEqual } from '../../../../utils/generalUtils';
 
-const GameDisplay = ({ game, users, excludedGames, setExcludedGames }) => {
+const GameDisplay = ({ game, users, excludedGames, setExcludedGames, maps }) => {
+
+    // Don't bother allowing the map to be added/removed from excludedGames if the map isn't active 
+    const [inactive, setInactive] = useState(
+        (maps.some(map => game.beatmap.id == map.id && arraysEqual(game.mods, map.mods) && !map.selected))
+    );
+
+    useEffect(() => {
+        setInactive((maps.some(map => game.beatmap.id == map.id && arraysEqual(game.mods, map.mods) && !map.selected)));
+    }, [maps])
+
     function findUser(id) {
         return users.find((user) => user.id === id);
     }
 
     function handleCheck(e) {
+        if (inactive) return;
+
         const gameId = Number(e.target.value);
 
         setExcludedGames(prev => {
@@ -16,10 +30,8 @@ const GameDisplay = ({ game, users, excludedGames, setExcludedGames }) => {
             } else {
                 updated.add(gameId);
             }
-            console.log(updated);
             return updated;
         });
-
     }
 
     let sortedScores = null;
@@ -75,6 +87,7 @@ const GameDisplay = ({ game, users, excludedGames, setExcludedGames }) => {
                 id={`excluded${game.id}`}
                 checked={!excludedGames.has(game.id)}
                 onChange={handleCheck}
+                disabled={inactive}
             />
             <div>
                 <div>{game.beatmap.beatmapset.title} [{game.beatmap.version}]</div>

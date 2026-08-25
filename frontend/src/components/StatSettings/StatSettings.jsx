@@ -6,7 +6,7 @@ const StatSettings = ({selectedMatches, setSelectedMatches, maps, setMaps, exclu
     return (<>
         <div className={styles.flexContainer}>
             <MapList maps={maps} setMaps={setMaps}/>
-            <MatchList selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} excludedGames={excludedGames} setExcludedGames={setExcludedGames}/>
+            <MatchList selectedMatches={selectedMatches} setSelectedMatches={setSelectedMatches} excludedGames={excludedGames} setExcludedGames={setExcludedGames} maps={maps}/>
         </div>
     </>);
 }

@@ -327,6 +327,7 @@ function filterGames(matches, excluded) {
 
             if (!game) return false;
             if (excluded.some(id => id == game.id)) return false;
+            if (!game.end_time) return false;
             return true;
         })
 

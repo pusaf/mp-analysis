@@ -4,16 +4,15 @@ import GameList from './GameList/GameList';
 
 import { useState, useEffect } from 'react';
 
-const MatchList = ({selectedMatches, setSelectedMatches, excludedGames, setExcludedGames}) => {
-
+const MatchList = ({selectedMatches, setSelectedMatches, excludedGames, setExcludedGames, maps}) => {
     const [activeMatch, setActiveMatch] = useState(null);
-
-    // TODO: implement setting active match by clicking on corresponding match
 
     useEffect(() => {
         if (selectedMatches.length == 0) {
             setActiveMatch(null);
         } else if (selectedMatches.length >= 1 && !activeMatch) {
+            setActiveMatch(selectedMatches[0]);
+        } else if (!selectedMatches.some((match) => match.match.id == activeMatch.match.id)) {
             setActiveMatch(selectedMatches[0]);
         }
     }, [selectedMatches]);
@@ -44,12 +43,12 @@ const MatchList = ({selectedMatches, setSelectedMatches, excludedGames, setExclu
                 <h3>Preview added matches here. </h3>
                 <ul className={styles.matchList}>
                     {selectedMatches.map((mp) => {
-                        return <MatchDisplay key={mp.match.id} mp={mp} setSelectedMatches={setSelectedMatches}/>
+                        return <MatchDisplay key={mp.match.id} mp={mp} setSelectedMatches={setSelectedMatches} setActiveMatch={setActiveMatch}/>
                     })}
                 </ul>
             </div>
             <div className={styles.games}>
-                <GameList mp={activeMatch} excludedGames={excludedGames} setExcludedGames={setExcludedGames}/>
+                <GameList mp={activeMatch} excludedGames={excludedGames} setExcludedGames={setExcludedGames} maps={maps}/>
             </div>
         </div>
     </>);
