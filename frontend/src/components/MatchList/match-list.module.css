@@ -1,8 +1,8 @@
 .card {
-    flex: 1 1 auto;
+    flex: 0 0 auto;
 
+    width: calc(70% - 50px);
     margin-left: 20px;
-
 
     padding: 20px 20px;
     border-radius: 15px;
@@ -12,23 +12,17 @@
     color: var(--color-text-1);
 
     display: flex;
-    
 }
 
+
 .matches {
-    flex: 0 0 auto;
+    flex: 0.5;
     width: 30%;
     padding-right: 20px;
 
     border-right: 2px solid var(--color-border);
 }
 
-.games {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-}
 
 .matchList {
     margin: 5px 0;

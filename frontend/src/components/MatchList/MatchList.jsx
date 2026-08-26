@@ -43,13 +43,11 @@ const MatchList = ({selectedMatches, setSelectedMatches, excludedGames, setExclu
                 <h3>Preview added matches here. </h3>
                 <ul className={styles.matchList}>
                     {selectedMatches.map((mp) => {
-                        return <MatchDisplay key={mp.match.id} mp={mp} setSelectedMatches={setSelectedMatches} setActiveMatch={setActiveMatch}/>
+                        return <MatchDisplay key={mp.match.id} mp={mp} setSelectedMatches={setSelectedMatches} activeMatch={activeMatch} setActiveMatch={setActiveMatch}/>
                     })}
                 </ul>
             </div>
-            <div className={styles.games}>
-                <GameList mp={activeMatch} excludedGames={excludedGames} setExcludedGames={setExcludedGames} maps={maps}/>
-            </div>
+            <GameList mp={activeMatch} excludedGames={excludedGames} setExcludedGames={setExcludedGames} maps={maps}/>
         </div>
     </>);
 }

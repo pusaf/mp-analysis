@@ -84,6 +84,11 @@ const GameDisplay = ({ game, users, excludedGames, setExcludedGames, maps }) => 
                     url(${game.beatmap.beatmapset.covers.cover})
                 `
             }}
+            onClick={() => window.open(
+                `https://osu.ppy.sh/b/${game.beatmap.id}`,
+                '_blank',
+                'noopener,noreferrer'
+            )}
         >   
             <label htmlFor={`excluded${game.id}`}></label>
             <input
@@ -92,10 +97,11 @@ const GameDisplay = ({ game, users, excludedGames, setExcludedGames, maps }) => 
                 id={`excluded${game.id}`}
                 checked={!excludedGames.has(game.id)}
                 onChange={handleCheck}
+                onClick={(e) => e.stopPropagation()}
                 disabled={inactive}
             />
             <div>
-                <div>{game.beatmap.beatmapset.title} [{game.beatmap.version}]</div>
+                <div className={styles.title}>{game.beatmap.beatmapset.title} [{game.beatmap.version}]</div>
                 <div>{modStr}</div>
             </div>
         </div>
@@ -112,8 +118,14 @@ const GameDisplay = ({ game, users, excludedGames, setExcludedGames, maps }) => 
                     return (
                         <li key={`GAME${game.id}RANKING${index}`}>
                             <div className={`${styles.score} ${styles[`${score.match.team}Team`]}`}>
-                                <div>{player.username}</div>
-                                <div>
+                                <a
+                                    href={`https://osu.ppy.sh/users/${player.username}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    onClick={(e) => e.stopPropagation()}>
+                                        {player.username}
+                                </a>
+                                <div className={styles.score1}>
                                     <div className={styles.score2}>
                                         <div>
                                             <span className={styles.label}>Combo</span>

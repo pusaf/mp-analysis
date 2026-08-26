@@ -2,17 +2,18 @@
 .game {
     background-color: var(--color-secondary);
     min-width: 0;
+
 }
 
-
-
 .gameHeader {
-
     padding: 10px 10px 10px 10px;
     
     background-size: cover;
     background-position: center;
+
+    cursor: pointer;
 }
+
 
 .gameHeader input {
     display: flex;
@@ -27,7 +28,13 @@
     padding-top: 20px;
     display: flex;
     justify-content: space-between;
+
 }
+
+.title {
+    width: 300px;
+}
+
 
 .game li {
     padding: 5px 5px 0 5px;
@@ -40,18 +47,26 @@
     padding: 5px 10px;
 
     border-radius: 5px;
-    background: linear-gradient(to right, var(--color-tertiary) 0%, var(--color-primary) 20%);
+    background: linear-gradient(to right, var(--color-tertiary) 0%, var(--color-primary) 30%);
     border: 1px solid var(--color-border);
 
     min-width: 0;
 }
 
+.game a {
+    color: var(--color-text);
+}
+
+.game a:hover {
+    text-decoration: underline;
+}
+
 .redTeam {
-    background: linear-gradient(to right, darkred 0%, var(--color-primary) 20%);
+    background: linear-gradient(to right, darkred 0%, var(--color-primary) 30%);
 }
 
 .blueTeam {
-    background: linear-gradient(to right, darkblue, var(--color-primary) 20%);
+    background: linear-gradient(to right, darkblue, var(--color-primary) 30%);
 }
 
 

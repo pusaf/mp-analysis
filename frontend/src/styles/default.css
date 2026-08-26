@@ -5,6 +5,7 @@
     --color-secondary: rgb(8, 9, 44);
     --color-tertiary: rgb(30, 27, 72);
     --color-accent: rgb(145, 92, 255);
+    --color-selected: rgb(41, 37, 93);
     --color-background: rgb(9, 10, 39);
     --color-border: rgb(49, 36, 105);
     --color-text-1: rgb(240,240,240);
@@ -70,4 +71,9 @@ h3 {
     font-weight: 500;
     color: var(--color-text-2);
     margin: 0;
+}
+
+
+a {
+    text-decoration: none;
 }

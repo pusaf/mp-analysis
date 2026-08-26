@@ -16,11 +16,14 @@
 }
 
 
-.mp:last-child {
-    border: none;
+
+
+
+.active {
+    border: 2px solid var(--color-accent);
 }
 
-.mpDropdown {
+.mpOptions {
     display: flex;
     align-items: center;
     gap: 15px;
@@ -29,19 +32,6 @@
     padding-left: 10px;
 }
 
-.dropdown {
-    display: block;
-    width: 0; 
-    height: 0; 
-    flex-shrink: 0;
-
-    border-top: 6px solid transparent;
-    border-bottom: 6px solid transparent; 
-    
-    border-right: 10px solid var(--color-text-1); 
-    transition: transform 0.2s ease;
-
-}
 
 .expanded .dropdown {
     transform: rotate(-90deg);
@@ -78,3 +68,4 @@
 .name:hover {
     text-decoration: underline;
 }
+

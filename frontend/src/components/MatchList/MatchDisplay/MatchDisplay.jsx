@@ -5,8 +5,7 @@ import { useState } from 'react';
 // TODO
 // Implement dropdown for each match to preview the scores
 
-const MatchDisplay = ({ mp, setSelectedMatches, setActiveMatch }) => {
-    
+const MatchDisplay = ({ mp, setSelectedMatches, activeMatch, setActiveMatch }) => {
     // Removes a match from selected matches
     function removeMatch() {
         setSelectedMatches(prev => prev.filter(match => match.match.id !== mp.match.id));
@@ -19,15 +18,16 @@ const MatchDisplay = ({ mp, setSelectedMatches, setActiveMatch }) => {
     }).map((game) => game.game);
     const mapCount = games.length;
 
+
     return (<>
-        <li className={styles.mp}>
+        <li className={`${styles.mp} ${activeMatch?.match.id == mp.match.id ? styles.active : ''}`}>
             <button 
                 className={styles.name}
                 onClick={() => setActiveMatch(mp)}
             >
                 {mp.match.name}
             </button>
-            <span className={styles.mpDropdown}>
+            <span className={styles.mpOptions}>
                 <span>{mapCount} maps</span>
                 <button
                     className={styles.removeButton}
