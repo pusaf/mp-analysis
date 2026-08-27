@@ -1,9 +1,40 @@
 const { medianScores, avgScores } = require('../src/services/stats/mappool');
-const { performanceStats } = require('../src/services/stats/individual');
+const { performanceStats, individualLeaderboards } = require('../src/services/stats/individual');
 const db = require('../src/db/queries');
 
+test("Leaderboard generation for 4v4 ts8 match", async() => {
+    // Generate testing data
+    const testMatch = await db.getMatches([121102814]);
+    const testMaps = [
+        {
+            id: 5654407,
+            name: '4me 4me',
+            diff: 'sweet boy',
+            mods: ['NF', 'DT']
+        }, 
+        {
+            id: 574165,
+            name: 'Spelunker',
+            diff: 'AR0 TROLL',
+            mods: ['NF']
+        }
+    ]
 
-test.skip("Single 1v1 match playcount", async() => {
+    const leaderboards = individualLeaderboards(testMaps, testMatch, []);
+
+    // Make sure maps are in order
+    expect(leaderboards[0].map.name).toBe('4me 4me');
+    expect(leaderboards[1].map.name).toBe('Spelunker');
+    
+    // Make sure scores are in order (check top and bottom scores)
+    expect(leaderboards[0].scores[0].score.score).toBe(766288);
+    expect(leaderboards[0].scores[7].score.score).toBe(79164);
+    expect(leaderboards[1].scores[0].score.score).toBe(794853);
+    expect(leaderboards[1].scores[7].score.score).toBe(108804);
+}) 
+
+
+test("Single 1v1 match stats", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([119794867]);
     const testMaps = [

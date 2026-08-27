@@ -1,13 +1,12 @@
 const { medianScores } = require("./mappool");
 const { getUniquePlayers,  getAvgMapsPlayed, playerParticipated, getMapsPlayed } = require('../../utils/matchUtils');
-const { modNormalizer } = require('../../utils/statsUtils'); 
+const { modNormalizer, arraysEqual } = require('../../utils/statsUtils'); 
+
+module.exports = { performanceStats, individualLeaderboards };
 
 
-module.exports = { performanceStats };
 
-// Individual statistics
-
-
+// Individual performance statistics
 
 /**
  * Calculates all the statistics displayed on the standard performance score page of a stats sheet, including
@@ -55,13 +54,8 @@ function performanceStats(maps, matches, excluded) {
             notPlayer += 1;
         }
     }
-
     return data;
-
 }
-
-
-
 
 /**
  * Calculates the performance scores of each player who set a score in the given matches.
@@ -101,7 +95,6 @@ function pscores(maps, matches, players, scores) {
             })
         }
     }
-
     return data;
 }
 
@@ -168,10 +161,8 @@ function playcounts(maps, matches, players, scores) {
             });
         }
     }
-
     return data;
 }
-
 
 /**
  * Calculates the mod normalized average score each player got
@@ -196,7 +187,6 @@ function avgScore(maps, matches, players, scores) {
     }
     return data;
 }
-
 
 /**
  * Calculates the average accuracy each player got
@@ -257,13 +247,45 @@ function highestScore(maps, matches, players, scores) {
 }
 
 
+
+// Individual leaderboards for each map
+
+function individualLeaderboards(maps, matches, excluded) {
+    if (!matches || !maps) {
+        return false;
+    }
+
+    // Filter out games that were excluded
+    const filteredMatches = filterGames(matches, excluded);
+    
+    players = getUniquePlayers(filteredMatches);
+    const scores = maps.map(map => getMapScores(filteredMatches, map));
+
+
+    const leaderboards = scores.map((map, index) => {
+        const sortedScores = map.sort((a,b) => b.score - a.score);
+        return {
+            map: maps[index],
+            scores: sortedScores.map((score) => {
+                return {
+                    'player': players.find((player) => player.id == score.user_id),
+                    'score': score
+                };
+            })
+        };
+    });
+
+    return leaderboards;
+}
+
+
 function zPercentile() {
 
 }
 
-function leaderboard() {
 
-}
+
+
 
 
 
@@ -309,6 +331,31 @@ function getPlayerScores(matches, playerId, maps) {
         });
     });
 
+    return scores;
+}
+
+
+/**
+ * Gets each score in matches that was set on the given map
+ *
+ * @param {Match[]} matches
+ * @param {Map} map
+ * @returns {Array<Score>}
+ */
+function getMapScores(matches, map) {
+    const scores = [];
+
+    matches.forEach((match) => {
+        match.events.forEach((event) => {
+            const game = event.game;
+
+            if (!game) return;
+
+            if (map.id == game.beatmap_id && arraysEqual(map.mods,game.mods)) {
+                scores.push(...game.scores);
+            }
+        });
+    });
 
     return scores;
 }

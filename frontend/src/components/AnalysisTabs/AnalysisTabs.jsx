@@ -15,7 +15,7 @@ const AnalysisTabs = ({ tab, setTab, statsReady }) => {
                             e.preventDefault();
                         }
                     }}
-                >INDIVIDUAL STATS</NavLink>
+                >STATS</NavLink>
             </div>
         </div>
     </>)
