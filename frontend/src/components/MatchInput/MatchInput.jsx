@@ -33,6 +33,7 @@ const MatchInput = ({selectedMatches, setSelectedMatches}) => {
         setMatchInputs("");
         if (!response.ok) {
             console.error("Failed to import matches");
+            setLoading(false);
             return;
         } 
 

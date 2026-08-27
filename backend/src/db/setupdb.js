@@ -1,5 +1,6 @@
+const path = require("path");
 const { Client } = require("pg");
-process.loadEnvFile();
+process.loadEnvFile(path.resolve(__dirname, "../../.env"));
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS matches (

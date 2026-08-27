@@ -3,8 +3,6 @@ const { performanceStats } = require('../src/services/stats/individual');
 const db = require('../src/db/queries');
 
 
-
-
 test.skip("Single 1v1 match playcount", async() => {
     // Generate testing data
     const testMatch = await db.getMatches([119794867]);
@@ -49,16 +47,16 @@ test.skip("Single 1v1 match playcount", async() => {
 
 
 
-test("Multiple team match pscore", async() => {
-    // Generate testing data
-    const testMatch = await db.getMatches([120062857, 120078133, 120078716]);
-    const testMaps = getowctest()
+// test("Multiple team match pscore", async() => {
+//     // Generate testing data
+//     const testMatch = await db.getMatches([120062857, 120078133, 120078716]);
+//     const testMaps = getowctest()
 
 
-    const stats = performanceStats(testMaps, testMatch, [630072583]);
-    console.log(stats);
-    expect(true).toBe(true)
-})
+//     const stats = performanceStats(testMaps, testMatch, [630072583]);
+//     console.log(stats);
+//     expect(true).toBe(true)
+// })
 
 
 
