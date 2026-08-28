@@ -23,8 +23,6 @@ const PerformanceRow = ({ userStats, index }) => {
 
     const rankColor = userStats.bestScore.rank.toLowerCase();
 
-    console.log(userStats.bestMap);
-
     return (<>
         <tr>
             <td>{userStats.mapsPlayed / userStats.maxMapsPlayed >= 0.7 ? <img src="/img/goldstar.svg" alt="star" /> : ""}</td>

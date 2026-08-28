@@ -11,6 +11,7 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats, excluded
         const matchIDs = selectedMatches.map((match) => match.match.id);
         const selectedMaps = maps.filter((map) => map.selected);
 
+        // Generate individual performance stats
         const individualPerformanceResponse = await fetch("/api/analysis/individual/performance", {
             method: "POST",
             headers: {
@@ -30,12 +31,33 @@ const GenerateStats = ({selectedMatches, maps, setStatsReady, setStats, excluded
 
         const individualPerformance = await individualPerformanceResponse.json();
 
+
+        // Generate individual leaderboards
+        const individualLeaderboardsResponse = await fetch("/api/analysis/individual/leaderboards", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify({
+                maps: selectedMaps,
+                matches: matchIDs,
+                excluded: Array.from(excludedGames)
+            })
+        })
+
+        if (!individualLeaderboardsResponse) {
+            console.error("Failed to get stats");
+            return;
+        }
+
+        const individualLeaderboards = await individualLeaderboardsResponse.json();
+
         // individualPerformance.forEach((person) => console.log(`${person.player.username}: ${person.pscore}, ${person.avgScore}`))
         // individualPerformance.forEach((person) => console.log(person));
 
-        // stats[0] is individual pscore
-        // stats[1] is 
-        setStats([individualPerformance]);
+        // stats[0] is individual performance stats
+        // stats[1] is individual leaderboards
+        setStats([individualPerformance, individualLeaderboards]);
 
         setStatsReady(true);
         navigate('individual');
