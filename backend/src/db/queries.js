@@ -11,9 +11,14 @@ async function getMatches(ids) {
                 statement_timeout: 10_000
             });
 
-            return result.rows.length
-                ? result.rows[0].data
-                : upsertMatch(id);
+            if (
+                result.rows.length === 0 ||
+                !result.rows[0].data.match.end_time
+            ) {
+                return upsertMatch(id);
+            }
+
+            return result.rows[0].data;
         })
     )
 
