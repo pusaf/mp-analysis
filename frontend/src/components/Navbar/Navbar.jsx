@@ -6,10 +6,10 @@ const Navbar = () => {
     <div className={styles.navContainer}>
         <nav className={styles.navbar}>
             <div className={styles.flexContainer}>
-                <h1>TEMPORARY NAME</h1>
+                <h1>MP Stats</h1>
             </div>
             <ul className={styles.navbuttons}>
-                <li><Link to="/">Home</Link></li>
+                {/* <li><Link to="/">Home</Link></li> */}
                 <li><Link to="analyze">Analyze Matches</Link></li>
             </ul>
         </nav>

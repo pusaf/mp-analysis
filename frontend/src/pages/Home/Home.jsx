@@ -1,9 +1,12 @@
 import styles from './home.module.css';
+import { Navigate } from 'react-router';
+
+// WIP - Temporarily just navigates to the analysis page
 
 const Home = () => {
-    return (<>
-        <h1>This is the homepage i gotta decide on a layout later</h1>
-    </>)
+    return (
+        <Navigate to="/analyze" replace/>
+    )
 }
 
 export default Home;

@@ -2,7 +2,7 @@ import styles from './analyze.module.css';
 import AnalysisTabs from '../../components/AnalysisTabs/AnalysisTabs';
 
 import { useState, useMemo, useEffect } from 'react';
-import { Outlet, useLocation, Navigate } from 'react-router';
+import { Outlet, useLocation, Navigate, useNavigate } from 'react-router';
 
 const Analyze = () => {
     const [tab, setTab] = useState("mappoolSelection");
@@ -11,6 +11,8 @@ const Analyze = () => {
     const [excludedGames, setExcludedGames] = useState(new Set());
     const [statsReady, setStatsReady] = useState(false);
     const [stats, setStats] = useState([]);
+
+    const navigate = useNavigate()
 
 
     // Generates array of unique map + mod combos every time selectedMatches is updated
